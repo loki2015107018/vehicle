@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2dfd928efab346c7aa718f953dd0f3e0" Name="Diagram1">
+        <EntityTypeShape EntityType="DBModel.BookingData" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.BranchMaster" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.RoleMaster" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.UserMaster" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="DBModel.FK__BookingDa__Booki__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__BookingDa__Branc__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__UserMaste__Branc__164452B1" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__UserMaste__RoleI__15502E78" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBModel.VehicleInfo" Width="1.5" PointX="3" PointY="13" />
+        <AssociationConnector Association="DBModel.FK__BookingDa__Vehic__1BFD2C07" />
+        <AssociationConnector Association="DBModel.FK__VehicleIn__Branc__1920BF5C" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

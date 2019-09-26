@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingData">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="BookingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleId" Type="bigint" />
+          <Property Name="BookingDate" Type="datetime" />
+          <Property Name="BookedfromDate" Type="datetime" />
+          <Property Name="BookedToDate" Type="datetime" />
+          <Property Name="TotalNoOfDays" Type="int" />
+          <Property Name="Amount" Type="bigint" />
+          <Property Name="PaymentMode" Type="varchar" MaxLength="50" />
+          <Property Name="PaymentReferenceId" Type="varchar" MaxLength="50" />
+          <Property Name="BookingUserId" Type="bigint" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="IsBookingApproved" Type="bit" />
+          <Property Name="IsBookingCancelled" Type="bit" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedOn" Type="datetime" />
+          <Property Name="CancelledBy" Type="varchar" MaxLength="50" />
+          <Property Name="CancelledOn" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="BranchMaster">
+          <Key>
+            <PropertyRef Name="BranchCode" />
+          </Key>
+          <Property Name="BranchCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchName" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleDescription" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreaedBy" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="varchar" MaxLength="20" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="15" />
+          <Property Name="EMail" Type="varchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="IsApprovedOn" Type="datetime" />
+          <Property Name="IsApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="BranchId" Type="int" />
+        </EntityType>
+        <EntityType Name="VehicleInfo">
+          <Key>
+            <PropertyRef Name="VehicleId" />
+          </Key>
+          <Property Name="VehicleId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleNumber" Type="varchar" MaxLength="20" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="VehicleType" Type="varchar" MaxLength="20" />
+          <Property Name="InsuranceExpiryDate" Type="date" />
+          <Property Name="LastServicedDate" Type="date" />
+          <Property Name="ServiceDueDate" Type="date" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="PriceperDay" Type="bigint" />
+          <Property Name="Model" Type="varchar" MaxLength="100" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <Association Name="FK__BookingDa__Booki__1CF15040">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="BookingData" Type="Self.BookingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="BookingData">
+              <PropertyRef Name="BookingUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookingDa__Branc__1DE57479">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="0..1" />
+          <End Role="BookingData" Type="Self.BookingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="BranchCode" />
+            </Principal>
+            <Dependent Role="BookingData">
+              <PropertyRef Name="BranchCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookingDa__Vehic__1BFD2C07">
+          <End Role="VehicleInfo" Type="Self.VehicleInfo" Multiplicity="0..1" />
+          <End Role="BookingData" Type="Self.BookingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleInfo">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="BookingData">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserMaste__Branc__164452B1">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="BranchCode" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserMaste__RoleI__15502E78">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VehicleIn__Branc__1920BF5C">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="0..1" />
+          <End Role="VehicleInfo" Type="Self.VehicleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="BranchCode" />
+            </Principal>
+            <Dependent Role="VehicleInfo">
+              <PropertyRef Name="BranchCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="BookingData" EntityType="Self.BookingData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BranchMaster" EntityType="Self.BranchMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleInfo" EntityType="Self.VehicleInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BookingDa__Booki__1CF15040" Association="Self.FK__BookingDa__Booki__1CF15040">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="BookingData" EntitySet="BookingData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookingDa__Branc__1DE57479" Association="Self.FK__BookingDa__Branc__1DE57479">
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+            <End Role="BookingData" EntitySet="BookingData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookingDa__Vehic__1BFD2C07" Association="Self.FK__BookingDa__Vehic__1BFD2C07">
+            <End Role="VehicleInfo" EntitySet="VehicleInfo" />
+            <End Role="BookingData" EntitySet="BookingData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserMaste__Branc__164452B1" Association="Self.FK__UserMaste__Branc__164452B1">
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserMaste__RoleI__15502E78" Association="Self.FK__UserMaste__RoleI__15502E78">
+            <End Role="RoleMaster" EntitySet="RoleMaster" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VehicleIn__Branc__1920BF5C" Association="Self.FK__VehicleIn__Branc__1920BF5C">
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+            <End Role="VehicleInfo" EntitySet="VehicleInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookingData">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="BookingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleId" Type="Int64" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="BookedfromDate" Type="DateTime" Precision="3" />
+          <Property Name="BookedToDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalNoOfDays" Type="Int32" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentReferenceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BookingUserId" Type="Int64" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="IsBookingApproved" Type="Boolean" />
+          <Property Name="IsBookingCancelled" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+          <Property Name="CancelledBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CancelledOn" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK__BookingDa__Booki__1CF15040" FromRole="BookingData" ToRole="UserMaster" />
+          <NavigationProperty Name="BranchMaster" Relationship="Self.FK__BookingDa__Branc__1DE57479" FromRole="BookingData" ToRole="BranchMaster" />
+          <NavigationProperty Name="VehicleInfo" Relationship="DBModel.FK__BookingDa__Vehic__1BFD2C07" FromRole="BookingData" ToRole="VehicleInfo" />
+        </EntityType>
+        <EntityType Name="BranchMaster">
+          <Key>
+            <PropertyRef Name="BranchCode" />
+          </Key>
+          <Property Name="BranchCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="BookingDatas" Relationship="Self.FK__BookingDa__Branc__1DE57479" FromRole="BranchMaster" ToRole="BookingData" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK__UserMaste__Branc__164452B1" FromRole="BranchMaster" ToRole="UserMaster" />
+          <NavigationProperty Name="VehicleInfoes" Relationship="DBModel.FK__VehicleIn__Branc__1920BF5C" FromRole="BranchMaster" ToRole="VehicleInfo" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreaedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK__UserMaste__RoleI__15502E78" FromRole="RoleMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EMail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsApprovedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="BranchId" Type="Int32" />
+          <NavigationProperty Name="BookingDatas" Relationship="Self.FK__BookingDa__Booki__1CF15040" FromRole="UserMaster" ToRole="BookingData" />
+          <NavigationProperty Name="BranchMaster" Relationship="Self.FK__UserMaste__Branc__164452B1" FromRole="UserMaster" ToRole="BranchMaster" />
+          <NavigationProperty Name="RoleMaster" Relationship="Self.FK__UserMaste__RoleI__15502E78" FromRole="UserMaster" ToRole="RoleMaster" />
+        </EntityType>
+        <Association Name="FK__BookingDa__Booki__1CF15040">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+          <End Role="BookingData" Type="Self.BookingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="BookingData">
+              <PropertyRef Name="BookingUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookingDa__Branc__1DE57479">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="0..1" />
+          <End Role="BookingData" Type="Self.BookingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="BranchCode" />
+            </Principal>
+            <Dependent Role="BookingData">
+              <PropertyRef Name="BranchCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserMaste__Branc__164452B1">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="BranchCode" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserMaste__RoleI__15502E78">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="0..1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookingDatas" EntityType="Self.BookingData" />
+          <EntitySet Name="BranchMasters" EntityType="Self.BranchMaster" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMaster" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+          <AssociationSet Name="FK__BookingDa__Booki__1CF15040" Association="Self.FK__BookingDa__Booki__1CF15040">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="BookingData" EntitySet="BookingDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookingDa__Branc__1DE57479" Association="Self.FK__BookingDa__Branc__1DE57479">
+            <End Role="BranchMaster" EntitySet="BranchMasters" />
+            <End Role="BookingData" EntitySet="BookingDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserMaste__Branc__164452B1" Association="Self.FK__UserMaste__Branc__164452B1">
+            <End Role="BranchMaster" EntitySet="BranchMasters" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserMaste__RoleI__15502E78" Association="Self.FK__UserMaste__RoleI__15502E78">
+            <End Role="RoleMaster" EntitySet="RoleMasters" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <EntitySet Name="VehicleInfoes" EntityType="DBModel.VehicleInfo" />
+          <AssociationSet Name="FK__BookingDa__Vehic__1BFD2C07" Association="DBModel.FK__BookingDa__Vehic__1BFD2C07">
+            <End Role="VehicleInfo" EntitySet="VehicleInfoes" />
+            <End Role="BookingData" EntitySet="BookingDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VehicleIn__Branc__1920BF5C" Association="DBModel.FK__VehicleIn__Branc__1920BF5C">
+            <End Role="BranchMaster" EntitySet="BranchMasters" />
+            <End Role="VehicleInfo" EntitySet="VehicleInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VehicleInfo">
+          <Key>
+            <PropertyRef Name="VehicleId" />
+          </Key>
+          <Property Name="VehicleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="VehicleType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="InsuranceExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="LastServicedDate" Type="DateTime" Precision="0" />
+          <Property Name="ServiceDueDate" Type="DateTime" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PriceperDay" Type="Int64" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="Int32" />
+          <NavigationProperty Name="BookingDatas" Relationship="DBModel.FK__BookingDa__Vehic__1BFD2C07" FromRole="VehicleInfo" ToRole="BookingData" />
+          <NavigationProperty Name="BranchMaster" Relationship="DBModel.FK__VehicleIn__Branc__1920BF5C" FromRole="VehicleInfo" ToRole="BranchMaster" />
+        </EntityType>
+        <Association Name="FK__BookingDa__Vehic__1BFD2C07">
+          <End Type="DBModel.VehicleInfo" Role="VehicleInfo" Multiplicity="0..1" />
+          <End Type="DBModel.BookingData" Role="BookingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleInfo">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="BookingData">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VehicleIn__Branc__1920BF5C">
+          <End Type="DBModel.BranchMaster" Role="BranchMaster" Multiplicity="0..1" />
+          <End Type="DBModel.VehicleInfo" Role="VehicleInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="BranchCode" />
+            </Principal>
+            <Dependent Role="VehicleInfo">
+              <PropertyRef Name="BranchCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="BookingDatas">
+            <EntityTypeMapping TypeName="DBModel.BookingData">
+              <MappingFragment StoreEntitySet="BookingData">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="BookedfromDate" ColumnName="BookedfromDate" />
+                <ScalarProperty Name="BookedToDate" ColumnName="BookedToDate" />
+                <ScalarProperty Name="TotalNoOfDays" ColumnName="TotalNoOfDays" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="PaymentReferenceId" ColumnName="PaymentReferenceId" />
+                <ScalarProperty Name="BookingUserId" ColumnName="BookingUserId" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="IsBookingApproved" ColumnName="IsBookingApproved" />
+                <ScalarProperty Name="IsBookingCancelled" ColumnName="IsBookingCancelled" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="CancelledBy" ColumnName="CancelledBy" />
+                <ScalarProperty Name="CancelledOn" ColumnName="CancelledOn" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BranchMasters">
+            <EntityTypeMapping TypeName="DBModel.BranchMaster">
+              <MappingFragment StoreEntitySet="BranchMaster">
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="DBModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMaster">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreaedBy" ColumnName="CreaedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="DBModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsApprovedOn" ColumnName="IsApprovedOn" />
+                <ScalarProperty Name="IsApprovedBy" ColumnName="IsApprovedBy" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleInfoes">
+            <EntityTypeMapping TypeName="DBModel.VehicleInfo">
+              <MappingFragment StoreEntitySet="VehicleInfo">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="PriceperDay" ColumnName="PriceperDay" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ServiceDueDate" ColumnName="ServiceDueDate" />
+                <ScalarProperty Name="LastServicedDate" ColumnName="LastServicedDate" />
+                <ScalarProperty Name="InsuranceExpiryDate" ColumnName="InsuranceExpiryDate" />
+                <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
