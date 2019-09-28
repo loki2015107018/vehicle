@@ -98,7 +98,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="Name">UserName</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtUserName" placeholder="username" class="form-control input-md" onkeyup="checkUsername()"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtUserName" placeholder="username" class="form-control input-md" onkeyup="checkUsername()" MaxLength="10"></asp:TextBox>
                         </div>
                         <asp:Label runat="server" ID="lblmsg"></asp:Label>
                     </div>
@@ -107,7 +107,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="passwordinput">Password</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" placeholder="Password" class="form-control input-md"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" placeholder="Password" class="form-control input-md" MaxLength="10"></asp:TextBox>
                             <%--<span class="help-block">max 16 characters</span>--%>
                         </div>
                     </div>
@@ -116,26 +116,26 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="confirm_password">Confirm Password</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtCPassword" TextMode="Password" placeholder="Confirm Password" class="form-control input-md"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtCPassword" TextMode="Password" placeholder="Confirm Password" class="form-control input-md" MaxLength="10"></asp:TextBox>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="Name">First Name</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtFirstName" placeholder="First Name" class="form-control input-md"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtFirstName" placeholder="First Name" class="form-control input-md" MaxLength="10"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="txtLastName">Last Name</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtLastName" placeholder="Last Name" class="form-control input-md"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtLastName" placeholder="Last Name" class="form-control input-md" MaxLength="10"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="txtAge">Age</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtAge" placeholder="Age" class="form-control input-md"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtAge" placeholder="Age" class="form-control input-md" MaxLength="3"></asp:TextBox>
                         </div>
                     </div>
 
@@ -154,7 +154,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="mobilenumber">Mobile Number</label>
                         <div class="col-md-5">
-                            <asp:TextBox runat="server" ID="txtMobile" placeholder="Mobile Number" class="form-control input-md"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtMobile" placeholder="Mobile Number" class="form-control input-md" MaxLength="10"></asp:TextBox>
                         </div>
                     </div>
 
@@ -171,7 +171,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="submit"></label>
                         <div class="col-md-4">
-                            <asp:Button runat="server" ID="btnRegister" Text="Submit" class="btn btn-success" OnClick="btnRegister_Click" OnClientClick="return display()"/>                            
+                            <asp:Button runat="server" ID="btnRegister" Text="Submit" class="btn btn-success" OnClick="btnRegister_Click" OnClientClick="return display()" />                            
                         </div>
                     </div>
 

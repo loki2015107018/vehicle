@@ -1,13 +1,19 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VehicleBooking.aspx.cs" Inherits="WebAPP.VehicleBooking" %>
+﻿<%@ Page Title="VehicleBooking" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VehicleBooking.aspx.cs" Inherits="WebAPP.VehicleBooking" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="js/booking%20validation.js"></script>
     <script>
         function amount() {
-            var a = Number(document.getElementById("totalnoofdays").value);
-            var b = Number(document.getElementById("hidAmount").value);
-            var res = a * b;
+            var TotalDays = Number(document.getElementById("totalnoofdays").value);
+            var url = new URL(document.URL);
+            var amount = url.searchParams.get("amount");
+            if (TotalDays != 0) {
+                document.getElementById('Amount').value = TotalDays * amount;
+            }
+            else {
+                document.getElementById('Amount').value = amount;
+            }
             
-            Number(document.getElementById('Amount').value=res);
+            
             
         }
     </script>
@@ -25,6 +31,7 @@
     <asp:HiddenField runat="server" ID="hidId"  />
     <asp:HiddenField runat="server" ID="hidAmount"/>
     <div class="form-row">
+        
         <div class="form-group col-md-6">
             <label for="inputFromDate">From Date</label>
             <asp:TextBox runat="server" ID="BookingFromDate" class="form-control" placeholder="BookingDate" TextMode="Date" ng-model="date1" ClientIDMode="Static" ></asp:TextBox>
@@ -46,7 +53,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputAmount">Amount</label>
-            <asp:TextBox runat="server" ID="Amount" class="form-control" placeholder="Amount" ClientIDMode="Static"></asp:TextBox>
+            <asp:TextBox runat="server" ID="Amount" Text="0" class="form-control" placeholder="Amount" ClientIDMode="Static" ReadOnly="true"></asp:TextBox>
         </div>
         </div>
     <asp:Button runat="server" ID="btnsubmit" Text="Pay" class="btn btn-primary"  OnClick="btnsubmit_Click"/> 

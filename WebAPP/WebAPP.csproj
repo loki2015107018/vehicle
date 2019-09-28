@@ -147,6 +147,7 @@
     <Content Include="js\JavaScript.js" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="js\sb-admin-2.min.js" />
+    <Content Include="js\vehicle_validation.js" />
     <Content Include="Login.aspx" />
     <Content Include="Payment.aspx" />
     <Content Include="Register.aspx" />
@@ -183,7 +184,7 @@
     <Content Include="UserSearch.aspx" />
     <Content Include="VehicleBooking.aspx" />
     <Content Include="VehicleCrud.aspx" />
-    <Content Include="VehicleOperations.aspx" />
+    <Content Include="mybookings.aspx" />
     <Content Include="VehicleReservationSystem.sql" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -2042,12 +2043,12 @@
     <Compile Include="VehicleCrud.aspx.designer.cs">
       <DependentUpon>VehicleCrud.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VehicleOperations.aspx.cs">
-      <DependentUpon>VehicleOperations.aspx</DependentUpon>
+    <Compile Include="mybookings.aspx.cs">
+      <DependentUpon>mybookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VehicleOperations.aspx.designer.cs">
-      <DependentUpon>VehicleOperations.aspx</DependentUpon>
+    <Compile Include="mybookings.aspx.designer.cs">
+      <DependentUpon>mybookings.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

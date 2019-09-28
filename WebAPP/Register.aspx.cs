@@ -15,6 +15,7 @@ namespace WebAPP
             if(!IsPostBack)
             {
                 LoadData();
+                
             }
         }
         public void LoadData()
@@ -64,6 +65,9 @@ namespace WebAPP
                 string _msg = string.Format("SuccessFunction('{0}')", "Registered Successfully");
 
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", _msg, true);
+
+                
+
             }
             else
             {

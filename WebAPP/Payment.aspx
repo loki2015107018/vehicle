@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="WebAPP.Payment" %>
+﻿<%@ Page Title="Payment" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="WebAPP.Payment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="border-bottom-info" style="margin-bottom: 4%; padding-bottom: 2%;">
         Booking 
@@ -11,34 +11,17 @@
             </a>
         </span>
     </div>
-     <div class="form-row">
+    <div class="form-row">
         <div class="form-group col-md-6">
-           <%-- <asp:RadioButton ID="rbcredit" runat="server"  onchange="valuechanged()" />--%>
-            <input type="radio" name="payment" id="rdcredit" />
-            <%-- <asp:TextBox runat="server" ID="BookingFromDate" class="form-control" placeholder="BookigDate" TextMode="Date" ClientIDMode="Static"></asp:TextBox>--%>
-             <label for="inputFromDate">Credit card</label>
+            <asp:RadioButtonList runat="server" ID="radiobutton" >
+                <asp:ListItem Value="Credit Card">Credit Card</asp:ListItem>
+                <asp:ListItem Value ="debit Card">Debit card </asp:ListItem>
+                <asp:ListItem Value="UPI">UPI</asp:ListItem>
+                <asp:ListItem Value="COD">Cash On Delivery</asp:ListItem>
+                <asp:ListItem Value="PhonePay">PhonePay</asp:ListItem>
+            </asp:RadioButtonList>
             
-
-        </div>
-        </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-               <%--  <asp:RadioButton ID="rbdebit" runat="server"  onchange="valuechanged()"/>--%>
-              <input type="radio" name="payment" id="rddebit" />
-            <%-- <asp:TextBox runat="server" ID="BookingFromDate" class="form-control" placeholder="BookigDate" TextMode="Date" ClientIDMode="Static"></asp:TextBox>--%>
-             <label for="inputFromDate">Debit card</label>
-       
-        </div>
-        </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-           <%--  <asp:RadioButton ID="rbupi" runat="server"  onchange="valuechanged()"/>--%>
-              <input type="radio" name="payment" id="rdupi" />
-            <%-- <asp:TextBox runat="server" ID="BookingFromDate" class="form-control" placeholder="BookigDate" TextMode="Date" ClientIDMode="Static"></asp:TextBox>--%>
-             <label for="inputFromDate">UPI</label>
-           
-        </div>
+         </div>
         </div>
    
     <asp:Button runat="server" ID="btnsubmit" Text="Pay" class="btn btn-primary"  OnClick="btnsubmit_Click" /> 

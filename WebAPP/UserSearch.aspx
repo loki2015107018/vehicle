@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserSearch.aspx.cs" Inherits="WebAPP.UserSearch" %>
+﻿<%@ Page Title="UserSearch" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UserSearch.aspx.cs" Inherits="WebAPP.UserSearch" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="border-bottom-info" style="margin-bottom: 4%; padding-bottom: 2%;">
         Book a Vehicle 

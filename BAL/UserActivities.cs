@@ -13,5 +13,18 @@ namespace BAL
         {
             return DAL.UserOperations.SearchVehicles(input);
         }
+
+        public static bool addBookingDetails(BookingData bookingData)
+        {
+            return DAL.UserOperations.addBookingDetails(bookingData);
+        }
+        public static List<BookingData> GetBookingList()
+        {
+            return DAL.UserOperations.GetAllBookings();
+        }
+        public static bool DeleteABookedVehicle(int id)
+        {
+            return DAL.UserOperations.DeleteVehicle(id);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VehicleCrud.aspx.cs" Inherits="WebAPP.VehicleCrud" %>
+﻿<%@ Page Title="VehicheCRUD" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VehicleCrud.aspx.cs" Inherits="WebAPP.VehicleCrud" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div style="float:right;margin-bottom:2%;">
             <a href="Addvehicle" class="btn btn-success btn-icon-split">
